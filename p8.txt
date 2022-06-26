@@ -1,0 +1,20 @@
+abstract class Notification
+case class SMS(mobile: String, msg: String) extends Notification
+case class Email(email: String, subject: String, body: String) extends Notification
+
+object temp {
+    def showNotification(notif: Notification):String = {
+        notif match {
+            case SMS(number, message) => s"You got a SMS from $number! Message: $message"
+            case Email(email, title, body) => s"You got an email from $email with subject: $title"
+        }
+    }
+
+    def main(args: Array[String]): Unit = {
+        val someSMS = SMS("9964378142", "Please submit assignment.")
+        println(showNotification(someSMS))
+
+        val someEmail = Email("faculty@nmit.ac.in", "Big Data", "Intro to Big Data and Scala")
+        println(showNotification(someEmail))
+    }
+}
