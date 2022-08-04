@@ -1,0 +1,40 @@
+n = as.integer(readline(prompt = "Enter no of employees"))
+
+EmpID = vector(mode = "integer", length = n)
+EmpName = vector(mode = "character", length = n)
+DOJ = vector(mode = "character", length = n)
+EmpCode = vector(mode = "numeric", length = n)
+Dept = vector(mode = "character", length = n)
+Desig = vector(mode = "character", length = n)
+
+print("The employee details:")
+for (i in 1:n) {
+  EmpID[i] = as.integer(readline(prompt = "EmpID: "))
+  EmpName [i] = as.character(readline(prompt = "EmpName: "))
+  DOJ[i] = as.character(readline(prompt = "DOJ: "))
+  EmpCode[i] = as.integer(readline(prompt = "EmpCode: "))
+  Dept [i] = as.character(readline(prompt = "Dept:"))
+  Desig[i] = as.character(readline(prompt = "Designation:"))
+}
+DOJ = as.Date(DOJ, format="%Y-%m-%d")
+
+Employee = data.frame(EmpID, EmpName, DOJ, EmpCode, Dept, Desig)
+
+write.csv(Employee, "~/dev/emp.csv", row.names=FALSE)
+
+empcsv = read.csv("~/dev/emp.csv")
+print(empcsv)
+
+print("Enter new Data")
+nEmpID = as.integer(readline(prompt = "EmpID: "))
+nEmpName = as.character(readline(prompt = "EmpName: "))
+nDOJ = as.Date(as.character(readline(prompt = "DOJ: ")),  format="%Y-%m-%d")
+nEmpCode = as.integer(readline(prompt = "EmpCode: "))
+nDept = as.character(readline(prompt = "Dept:"))
+nDesig = as.character(readline(prompt = "Designation:"))
+
+newrow = data.frame(nEmpID, nEmpName, nDOJ, nEmpCode, nDept, nDesig)
+write.table(newrow, file = "~/dev/emp.csv", sep = "," ,append = TRUE, col.names = FALSE, row.names = FALSE)
+
+empcsv = read.csv("~/dev/emp.csv")
+print(empcsv)
